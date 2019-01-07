@@ -15,6 +15,50 @@
 //     [11, 16, 15, 6],
 //     [10,  9,  8, 7]]
 
-function matrix(n) {}
+const matrix = (n) => {
+  const results = [];
+
+  for (let i = 0; i < n; i++) {
+    results.push([]);
+  };
+
+  let counter = 1;
+  let startColumn = 0;
+  let endColumn = n - 1;
+  let startRow = 0;
+  let endRow = n - 1;
+
+  while (startColumn <= endColumn && startRow <= endRow) {
+    // Top Row
+    for (let column = startColumn; column <= endColumn; column++) {
+      results[startRow][column] = counter;
+      counter++;
+    }
+    startRow++;
+
+    // Right Column
+    for (let row = startRow; row <= endRow; row++) {
+      results[row][endColumn] = counter;
+      counter++;
+    }
+    endColumn--;
+
+    // Bottom Row
+    for (let column = endColumn; column >= startColumn; column--) {
+      results[endRow][column] = counter;
+      counter++;
+    }
+    endRow--;
+
+    // Left Column
+    for (let row = endRow; row >= startRow; row--) {
+      results[row][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+
+  return results;
+}
 
 module.exports = matrix;
